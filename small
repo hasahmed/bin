@@ -1,0 +1,2 @@
+printf '\e[8;24;80t]'
+clear

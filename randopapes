@@ -1,0 +1,3 @@
+#!/usr/local/bin/ruby
+arr = Dir["/Users/hasankatie/Pictures/wallpapers/*"]
+system("osascript -e 'tell application \"Finder\" to set desktop picture to POSIX file \"#{arr.sample}\"'");
