@@ -6,8 +6,8 @@ sharedir(){
     pwd > $HOME/.sharedir
 }
 sharecd(){
-    if [ $(catshare | wc -l) -gt 0 ]; then
-        cd $(cat $HOME/.sharedir | tail -1)
+    if [ $(sharecat | wc -l) -gt 0 ]; then
+        cd $(cat $HOME/.sharedir | head -1)
     else
         echo "No directory shared"
     fi
@@ -19,16 +19,21 @@ sharepush(){
     pwd >> $HOME/.sharedir
 }
 sharepop(){
-    cdshare
-    file_len=`expr $(catshare | wc -l) - 1`
+    sharecd
+    file_len=`expr $(sharecat | wc -l) - 1`
     if [ $file_len -gt 0 ]; then
-        catshare | head -$(expr $(catshare | wc -l) - 1) > $HOME/.sharedir;
+        sharecat | head -$(expr $(sharecat | wc -l) - 1) > $HOME/.sharedir;
     else
         rm -f $HOME/.sharedir
         touch $HOME/.sharedir
     fi
 }
 
+# MacOS specific
 killdock(){
     defaults write com.apple.dock ResetLaunchPad -bool true; killall Dock
+}
+
+lookfor(){
+    find "$2" -name "$1" -print
 }
