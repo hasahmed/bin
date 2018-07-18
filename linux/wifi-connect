@@ -1,0 +1,15 @@
+#!/bin/bash
+wifi=$(netctl list | head -1 | tr -d " " | tr -d "*")
+wifi_enabled=$(netctl is-active $wifi)
+
+if [[ $wifi != "" ]]; then
+    if [[ $wifi_enabled == "inactive" ]]; then
+        netctl start $wifi
+        export WIFI=$wifi
+    elif [[ $wifi_enabled == "active" ]]; then
+        export WIFI=$wifi
+    fi
+else
+    echo "Error running wifi_connect"
+    export WIFI=-1
+fi
