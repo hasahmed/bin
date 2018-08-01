@@ -16,6 +16,18 @@ git-sync(){
 git-show-parent(){
     git show-branch | sed "s/].*//" | grep "\*" | grep -v "$(git rev-parse --abbrev-ref HEAD)" | head -n1 | sed "s/^.*\[//"
 }
+git-merge-sync(){
+    git add -A :/
+    git commit -m "$1"
+    current_branch=$(git branch | grep \*)
+    current_branch=${current_branch:2} #delete astrisk
+    if [[ $current_branch != "master" ]] then;
+        git checkout master
+        git merge master $current_branch --no-edit
+        git branch -d $current_branch
+    fi
+    git push origin master
+}
 git-rm-cached(){
     set -o errexit
 
