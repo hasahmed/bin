@@ -16,7 +16,7 @@ sharecat(){
     cat $HOME/.sharedir
 }
 sharepush(){
-    pwd >> $HOME/.sharedir
+    echo $(pwd) | cat - $HOME/.sharedir > $HOME/.sharetmp && mv $HOME/.sharetmp $HOME/.sharedir
 }
 sharepop(){
     sharecd

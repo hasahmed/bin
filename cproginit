@@ -1,5 +1,0 @@
-#!/bin/bash
-cp $HOME/Dropbox/Makefile_General/Makefile_general_c ./Makefile
-printf "#include <stdio.h>\nint main(){\n    printf(\"hello world\\\n\");\n}\n" > main.c
-
-#add the functionality of making the boilerplate for .c and .h pairs with include guards
