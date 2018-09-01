@@ -22,7 +22,7 @@ sharepop(){
     sharecd
     file_len=`expr $(sharecat | wc -l) - 1`
     if [ $file_len -gt 0 ]; then
-        sharecat | head -$(expr $(sharecat | wc -l) - 1) > $HOME/.sharedir;
+        sharecat | tail -$(expr $(sharecat | wc -l) - 1) > $HOME/.sharedir;
     else
         rm -f $HOME/.sharedir
         touch $HOME/.sharedir
