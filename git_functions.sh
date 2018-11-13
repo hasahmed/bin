@@ -8,7 +8,11 @@ git-sync(){
     if [[ $current_branch != "master" ]] then;
         git checkout master
         git merge master $current_branch --no-edit
-        git checkout $current_branch
+        if [[ $1 = "-d" ]] then;
+            git branch -d $current_branch
+        else
+            git checkout $current_branch
+        fi
     fi
     git push origin master
 }
